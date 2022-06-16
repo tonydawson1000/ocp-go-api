@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+
+# Deployment spec.
+metadata:
+  name: hello-go-api
+spec:
+  selector:
+    matchLabels:
+      app: hello-go
+  template:     # The template is used when the Deployment creates a Pod
+    metadata:   # Pods in a Deployment don’t have a name - they need to specify labels that match the selector
+      labels:
+        app: hello-go
+    spec:       # The Pod spec lists the container name and image
+      containers:
+      - name:  hello-go-api
+        image: tonydawson1000/ocp-go-api
+
+---
+
+# Service spec.
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-go-service
+spec:
+  ports:
+    - port: 8180        # The port the Service listens on
+      targetPort: 8180  # The port the traffic is sent to on the Pod
+  selector:
+    app: hello-go
+  type: LoadBalancer    # This Service is available for external traffic.

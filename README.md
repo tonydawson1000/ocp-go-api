@@ -34,7 +34,34 @@ A very simple stateless HTTP API written in Go
 ### Run the App (from a terminal)
 - `./hello`
 
-### Test the App (from a different terminal)
+### Test the App (from a different terminal) - Note the Hostname / Machine Name
 - `curl localhost:8180`
 - `curl localhost:8180/test`
 - `curl localhost:8180/anyurihere/1/2/3/4`
+
+---
+
+## Build and upload a Container Image to public Container Registry
+
+### Build Image
+- `nerdctl build -t <image-name> .`
+- e.g. - `nerdctl build -t tonydawson1000/ocp-go-api .`
+
+### Verify (List) Image
+- `nerdctl images`
+
+### Run a Local Container Instance
+- `nerdctl run --name hello-go --rm -p 8180:8180 <image-name>`
+- e.g. - `nerdctl run --name hello-go --rm -p 8180:8180 tonydawson1000/ocp-go-api`
+
+### Test the App (from a different terminal) - Note the Hostname / ContainerId
+- `curl localhost:8180`
+- `curl localhost:8180/test`
+- `curl localhost:8180/anyurihere/1/2/3/4`
+
+### Push to public Container Registry (Docker Hub)
+- Login (Default Docker Hub)
+    - `nerdctl login`
+- Push
+    - `nerdctl push <image-name>:<tag>`
+    - e.g. - `nerdctl push tonydawson1000/ocp-go-api:latest`
