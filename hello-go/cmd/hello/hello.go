@@ -17,7 +17,7 @@ func HelloServer(w http.ResponseWriter, r *http.Request) {
 		os.Exit(1)
 	}
 
-	fmt.Fprintf(w, "Hello, you requested: '%s' and were served by '%s'\n", r.URL.Path, hostname)
+	fmt.Fprintf(w, "Hi There! - So you requested: '%s' and were served by '%s'\n", r.URL.Path, hostname)
 	log.Printf("Received request for path: '%s' and were served by '%s'\n", r.URL.Path, hostname)
 }
 
